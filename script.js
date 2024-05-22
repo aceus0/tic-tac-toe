@@ -24,7 +24,7 @@ function GameBoard() {
         locationY = prompt(`What coulmn would you like to go?`)
             
         rowX = board[locationX];
-        console.log(rowX[locationY]);
+        // console.log(rowX[locationY]);
         
         
         if ((rowX[locationY]) === 0) {
@@ -32,13 +32,18 @@ function GameBoard() {
             valid = true;
         } else {
             console.log(`invalid move`);
+            }
         }
-    }
     } 
 
-    return { printBoard, selectLocation }
+    const getBoard = () => {
+        return board;
+    }
+
+    return { printBoard, selectLocation, getBoard }
 
 }
+
 
 
 function GameController() {
@@ -49,6 +54,7 @@ function GameController() {
     const board = GameBoard();
 
     let gameOver = false;
+    let winningPlayer = undefined;
 
     const players = [
         {
@@ -68,7 +74,6 @@ function GameController() {
 
         board.selectLocation(activePlayer);
         board.printBoard();
-        switchPlayer();
     }
     
     const switchPlayer = () => {
@@ -78,12 +83,69 @@ function GameController() {
     }
 
     const outcomeCheck = () => {
+        checkBoard = board.getBoard();
+        checkBoard = [...checkBoard];
+
+
+        const winner = (value) => {
+            if ((value === 3) || (value === -3)){
+                console.log(`win detected`);
+                winningPlayer = activePlayer;
+            } 
+            return
+        }
+        
+        const sum = (arr) => {
+            return arr.reduce((num, a) => num + a, 0);
+        }
+
+
+        const coulmnCheck = (coulmnNum) => {
+            while (coulmnNum > -1) {
+            coulmn = checkBoard.map(x => x[coulmnNum]);
+            coulmn = sum(coulmn);
+            winner(coulmn);
+            coulmnNum--;
+            }
+        }
+
+        const rowCheck = (rowNum) => {
+            while (rowNum > -1) {
+            row = checkBoard[rowNum];
+            row = sum(row);
+            winner(row);
+            rowNum--;
+            }
+        }
+
+        const diagCheck = (diagNum) => {
+                      
+            diag = checkBoard.map((arr, index) => arr[index]);
+            diag = sum(diag);
+            winner(diag);
+
+            diag = checkBoard.map((arr, index) => arr[diagNum - 1 - index])
+            diag = sum(diag);
+            winner(diag);
+
+        }
+        coulmnCheck(2);
+        rowCheck(2);
+        diagCheck(3);
+        
 
     }
     
     while (gameOver != true) {
         playRound();
+        outcomeCheck();
+        if (activePlayer === winningPlayer){
+            console.log(`${winningPlayer.name} has won!`);
+            gameOver = true;
+        }
+        switchPlayer();
     }
+    
 }
 
 const game = GameController();
