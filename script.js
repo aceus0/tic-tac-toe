@@ -24,7 +24,6 @@ function GameBoard() {
         locationY = prompt(`What coulmn would you like to go?`)
             
         rowX = board[locationX];
-        // console.log(rowX[locationY]);
         
         
         if ((rowX[locationY]) === 0) {
@@ -47,14 +46,15 @@ function GameBoard() {
 
 
 function GameController() {
-    const player1 = `Justin`// prompt(`What is Player 1's name?`);
-    const player2 = `Jacob`// prompt(`What is Player 2's name?`);
+    const player1 = prompt(`What is Player 1's name?`);
+    const player2 = prompt(`What is Player 2's name?`);
     console.log(`${player1} will be "Xs". ${player2} will be "Os".`);
 
     const board = GameBoard();
 
     let gameOver = false;
     let winningPlayer = undefined;
+    let gamemoves = 0;
 
     const players = [
         {
@@ -129,11 +129,11 @@ function GameController() {
             winner(diag);
 
         }
+
         coulmnCheck(2);
         rowCheck(2);
         diagCheck(3);
-        
-
+        gamemoves++;
     }
     
     while (gameOver != true) {
@@ -141,6 +141,9 @@ function GameController() {
         outcomeCheck();
         if (activePlayer === winningPlayer){
             console.log(`${winningPlayer.name} has won!`);
+            gameOver = true;
+        } else if(gamemoves === 9){
+            console.log(`It's a draw!`)
             gameOver = true;
         }
         switchPlayer();
