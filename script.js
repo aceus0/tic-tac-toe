@@ -341,16 +341,6 @@ function GameMaker() {
     })
 
 
-    yesBtn.addEventListener("click", (e) => {
-        dialogStart.close();
-        e.preventDefault();
-
-
-        cleanGame();
-        
-        startGame(player1, player2);
-    })
-
     newGameBtn.addEventListener("click", (e) => {
         
         dialogEnd.close();
