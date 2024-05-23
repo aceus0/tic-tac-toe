@@ -69,11 +69,22 @@ body {
     height: 100vh;
 }
 
+h1 {
+    font-size: 5rem;
+}
+
+
+
 section {
     justify-self: center;
     grid-column: 2/3;
 }
 
+section.header {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
 
 section.content {
     display: grid;
