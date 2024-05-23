@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+<dialog open id="start-game">
+    <form>
+        <h2>Tic Tac Toe!</h2>
+        <p>
+            <label for="player1">Player 1 Name:</label>
+            <input type="text" id="player1">
+        </p>
+        <p>
+            <label for="player2">Player 2 Name:</label>
+            <input type="text" id="player2">
+        <div>
+            <button id="playBtn" value="default" formmethod="dialog">Play!</button>
+        </div>
+    </form>
+</dialog>
+<dialog id="game-over">
+    <h2>Would you like to play again?</h2>
+    <button id="new-game" value="default" formmethod="dialog">Yes!</button>
+</dialog>
+    <section class="header">
+        <h1>Tic Tac Toe!</h1>
+    </section>
+    <section class="content">
+        <div class="display"></div>
+        <div class="game-board" id="game-board">
+        </div>
+        <div class="players" id="players">
+
+        </div>
+    </section>
+    <section class="footer">
+        Made by <a href="https://github.com/aceus0">Justin Hughes</a> for <a href="https://www.theodinproject.com/">the Odin Project</a>.
+    </section>
     <script src="script.js"></script>
 </body>
 </html>
